@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -634,6 +634,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cube2
       objectReference: {fileID: 0}
+    - target: {fileID: 2159697905082139045, guid: 5b07cfde8595e4936824c35616f7e5af, type: 3}
+      propertyPath: m_TagString
+      value: PlayerCube
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b07cfde8595e4936824c35616f7e5af, type: 3}
 --- !u!114 &4070355624988878672
@@ -790,7 +794,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07ff5465f69a64276bf7be364a901503, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 2
+  maxHealth: 4
   currentHealth: 0
   bloodSplashEffect: {fileID: 1799810784756815943, guid: 3c9d975074c114121815c23e7bc8c80e, type: 3}
   coinPrefab: {fileID: 0}
@@ -811,7 +815,7 @@ GameObject:
   - component: {fileID: 4070355625224853490}
   m_Layer: 0
   m_Name: Cube4
-  m_TagString: Player
+  m_TagString: PlayerCube
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1230,6 +1234,14 @@ PrefabInstance:
     - target: {fileID: 8697791168457828449, guid: db0023d60a6264ab3a345aa4e2c8ea81, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697791168457828455, guid: db0023d60a6264ab3a345aa4e2c8ea81, type: 3}
+      propertyPath: playerTag
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697791168457828455, guid: db0023d60a6264ab3a345aa4e2c8ea81, type: 3}
+      propertyPath: playerCubeTag
+      value: PlayerCube
       objectReference: {fileID: 0}
     - target: {fileID: 8697791168457828461, guid: db0023d60a6264ab3a345aa4e2c8ea81, type: 3}
       propertyPath: m_Name

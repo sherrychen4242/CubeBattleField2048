@@ -292,6 +292,7 @@ MonoBehaviour:
   agent: {fileID: 8697791168457828454}
   moveSpeed: 7
   playerTag: Player
+  playerCubeTag: PlayerCube
   damageAmount: 2
 --- !u!114 &8697791168457828452
 MonoBehaviour:
