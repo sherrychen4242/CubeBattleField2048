@@ -26,7 +26,7 @@ public class Cube2Bullet : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         Debug.Log("entered");
         if (collision.gameObject.CompareTag("Enemy"))
