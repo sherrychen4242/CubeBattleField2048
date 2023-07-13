@@ -153,6 +153,7 @@ GameObject:
   - component: {fileID: 8697791168457828454}
   - component: {fileID: 8697791168457828455}
   - component: {fileID: 8697791168457828452}
+  - component: {fileID: 2026926268047950027}
   m_Layer: 0
   m_Name: EnemyCube2
   m_TagString: Enemy
@@ -265,7 +266,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 5
+  m_Speed: 10
   m_Acceleration: 5
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -294,6 +295,9 @@ MonoBehaviour:
   playerTag: Player
   playerCubeTag: PlayerCube
   damageAmount: 2
+  startApproachTarget: 0
+  startSteppingBack: 0
+  target: {fileID: 0}
 --- !u!114 &8697791168457828452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -310,6 +314,23 @@ MonoBehaviour:
   currentHealth: 0
   bloodSplashEffect: {fileID: 1799810784756815943, guid: 3c9d975074c114121815c23e7bc8c80e, type: 3}
   coinPrefab: {fileID: 6701817442356497140, guid: baea879971f2f4a92912721af518898b, type: 3}
+--- !u!114 &2026926268047950027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8697791168457828461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bba1479e283dd04da64a47ed5cbe053, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fronzenEffectSlowDownPercentage: 0.8
+  agent: {fileID: 8697791168457828454}
+  originalSpeed: 0
+  frozenSlowedDownSpeed: 0
+  frozenSlowedDownFlag: 0
 --- !u!1 &8697791168714438590
 GameObject:
   m_ObjectHideFlags: 0

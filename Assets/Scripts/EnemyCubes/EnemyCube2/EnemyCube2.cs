@@ -17,6 +17,7 @@ public class EnemyCube2 : MonoBehaviour
     public bool startApproachTarget;
     public bool startSteppingBack;
     public GameObject target;
+    
     #endregion
     // Start is called before the first frame update
     void Start()
@@ -31,6 +32,8 @@ public class EnemyCube2 : MonoBehaviour
     void Update()
     {
         MoveTowardsPlayer();
+
+        
     }
 
     void MoveTowardsPlayer()
@@ -177,4 +180,5 @@ public class EnemyCube2 : MonoBehaviour
             }
         }
     }
+
 }
