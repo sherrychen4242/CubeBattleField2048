@@ -53,16 +53,32 @@ public class EnemyCube2 : MonoBehaviour
             {
                 target = FindClosestCube();
             }
-            if (target is null) return;
-            Vector3 newRandomPos = Vector3.zero;
-            float playerCubeScale = target.transform.localScale.x;
-            float enemyCubeScale = gameObject.transform.localScale.x;
-
-            if (agent.remainingDistance < ((playerCubeScale + enemyCubeScale) / 2f) * 1.2f)
+            if (target is null)
             {
-                newRandomPos = StepBack(target);
-                startSteppingBack = true;
+                return;
             }
+            else
+            {
+                try
+                {
+                    Vector3 newRandomPos = Vector3.zero;
+                    float playerCubeScale = target.transform.localScale.x;
+                    float enemyCubeScale = gameObject.transform.localScale.x;
+
+                    if (agent.remainingDistance < ((playerCubeScale + enemyCubeScale) / 2f) * 1.2f)
+                    {
+                        newRandomPos = StepBack(target);
+                        startSteppingBack = true;
+                    }
+                }
+                catch (System.Exception e)
+                {
+                    Debug.Log(e.Message);
+                    target = FindClosestCube();
+                }
+                
+            }
+            
         }
 
         // Get Back
@@ -72,12 +88,27 @@ public class EnemyCube2 : MonoBehaviour
             {
                 target = FindClosestCube();
             }
-            if (target is null) return;
-            float distance = Vector3.Distance(transform.position, target.transform.position);
-            if (agent.remainingDistance < 0.1f || distance > 1f)
+            if (target is null)
             {
-                startSteppingBack = false;
-                startApproachTarget = true;
+                return;
+            }
+            else
+            {
+                try
+                {
+                    float distance = Vector3.Distance(transform.position, target.transform.position);
+                    if (agent.remainingDistance < 0.1f || distance > 1f)
+                    {
+                        startSteppingBack = false;
+                        startApproachTarget = true;
+                    }
+                }
+                catch (System.Exception e)
+                {
+                    Debug.Log(e.Message);
+                    target = FindClosestCube();
+                }
+                
             }
         }
     }
@@ -134,8 +165,12 @@ public class EnemyCube2 : MonoBehaviour
                 }
                 float playerCubeScale = healthScripts[targetPlayerIndex].gameObject.transform.localScale.x;
                 float enemyScale = gameObject.transform.localScale.x;
-                if (minDistance < ((playerCubeScale + enemyScale)/2f) * 1.3f)
+                if (minDistance < ((playerCubeScale + enemyScale)/2f) * Mathf.Sqrt(2f) * 1.3f)
                 {
+                    GameObject cube = healthScripts[targetPlayerIndex].gameObject;
+                    Vector3 dir = cube.transform.position - gameObject.transform.position;
+                    dir = (dir.normalized + Vector3.up) * 5f;
+                    cube.GetComponentInParent<CubeMovement>().KickBack(dir);
                     healthScripts[targetPlayerIndex].TakeDamage(damageAmount);
                 }
                 

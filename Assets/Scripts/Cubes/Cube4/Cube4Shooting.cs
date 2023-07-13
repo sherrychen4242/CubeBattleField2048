@@ -3,15 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Cube2Shooting : CubeShooting
+public class Cube4Shooting : CubeShooting
 {
     #region PUBLIC VARIABLES
     
     #endregion
 
     #region PRIVATE VARIABLES
-    
+
     #endregion
+
+    public override void Start()
+    {
+        base.Start();
+
+    }
+
+    public override void Update()
+    {
+        
+        base.Update();
+
+    }
 
     public override void Shooting()
     {
