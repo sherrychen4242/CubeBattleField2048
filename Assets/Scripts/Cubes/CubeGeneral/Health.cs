@@ -7,6 +7,7 @@ public class Health : MonoBehaviour
     [SerializeField] int maxHealth;
     public int currentHealth;
     [SerializeField] GameObject bloodSplashEffect;
+    [SerializeField] GameObject coinPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +25,13 @@ public class Health : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
-            Instantiate(bloodSplashEffect, transform.position, Quaternion.identity);
+            GameObject bloodSplash = Instantiate(bloodSplashEffect, transform.position, Quaternion.identity);
+            float scale = gameObject.transform.localScale.x;
+            bloodSplash.transform.localScale = new Vector3(scale, scale, scale);
+            if (gameObject.CompareTag("Enemy") && maxHealth == 2)
+            {
+                Instantiate(coinPrefab, transform.position, Quaternion.identity);
+            }
             Destroy(gameObject);
         }
     }

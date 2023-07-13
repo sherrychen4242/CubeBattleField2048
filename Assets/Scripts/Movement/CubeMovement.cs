@@ -27,7 +27,7 @@ public class CubeMovement : MonoBehaviour
     public float horizontalInput;
     public float verticalInput;
     public Vector3 moveDirection;
-
+   /* public float initialYPosition;*/
     #endregion
     // Start is called before the first frame update
     void Start()
@@ -35,6 +35,8 @@ public class CubeMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         readyToJump = true;
+
+        /*initialYPosition = transform.position.y;*/
     }
 
     // Update is called once per frame
@@ -51,6 +53,14 @@ public class CubeMovement : MonoBehaviour
             rb.drag = groundDrag;
         else
             rb.drag = 0f;
+
+        /*if (!jumpKeyPressed)
+        {
+            if (Mathf.Abs(transform.position.y - initialYPosition) > 0.5f)
+            {
+                rb.AddForce(Vector3.up * 1f, ForceMode.Impulse);
+            }
+        }*/
 
         if (jumpKeyPressed && readyToJump && grounded)
         {
@@ -107,5 +117,10 @@ public class CubeMovement : MonoBehaviour
     private void ResetJump()
     {
         readyToJump = true;
+    }
+
+    public void KickBack(Vector3 dir)
+    {
+        rb.AddForce(dir, ForceMode.Impulse);
     }
 }
