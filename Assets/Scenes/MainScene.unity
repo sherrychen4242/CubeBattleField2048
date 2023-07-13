@@ -593,7 +593,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3469485297237083658, guid: a3709e2f8c86fa94bb265179831c1d73, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3469485297237083661, guid: a3709e2f8c86fa94bb265179831c1d73, type: 3}
       propertyPath: m_RootOrder
@@ -1035,7 +1035,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
-  bulletPrefab: {fileID: 7918693660321527368, guid: 0103940d35c2042cfb769c58e7969729, type: 3}
+  bulletPrefab: {fileID: 7918693660321527368, guid: 937ca7fabc4cee44498fbd4eed826328, type: 3}
   shootingCoolDownTime: 0.5
   bulletPos: {fileID: 1990266019564179508}
   bulletSpeed: 20
@@ -1254,7 +1254,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2159697905082139045, guid: 5b07cfde8595e4936824c35616f7e5af, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b07cfde8595e4936824c35616f7e5af, type: 3}
