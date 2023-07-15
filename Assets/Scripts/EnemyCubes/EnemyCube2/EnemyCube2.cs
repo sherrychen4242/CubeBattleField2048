@@ -172,7 +172,7 @@ public class EnemyCube2 : MonoBehaviour
                 {
                     GameObject cube = healthScripts[targetPlayerIndex].gameObject;
                     Vector3 dir = cube.transform.position - gameObject.transform.position;
-                    dir = (dir.normalized + Vector3.up) * 5f;
+                    dir = (dir.normalized) * 5f;
                     cube.GetComponentInParent<CubeMovement>().KickBack(dir);
                     healthScripts[targetPlayerIndex].TakeDamage(damageAmount);
                 }

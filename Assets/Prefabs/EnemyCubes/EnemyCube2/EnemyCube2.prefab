@@ -154,6 +154,8 @@ GameObject:
   - component: {fileID: 8697791168457828455}
   - component: {fileID: 8697791168457828452}
   - component: {fileID: 2026926268047950027}
+  - component: {fileID: -5510228974055453453}
+  - component: {fileID: -6785482326912410294}
   m_Layer: 0
   m_Name: EnemyCube2
   m_TagString: Enemy
@@ -331,6 +333,46 @@ MonoBehaviour:
   originalSpeed: 0
   frozenSlowedDownSpeed: 0
   frozenSlowedDownFlag: 0
+--- !u!114 &-5510228974055453453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8697791168457828461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 984bd76cfc9822d4fa829eadefff2cdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: {fileID: -6785482326912410294}
+  fireEffectDamagePerSecond: 1
+  fireEffectFlag: 0
+  timerSetUp: 0
+--- !u!114 &-6785482326912410294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8697791168457828461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5da25b2cde094158bddd3b5de8d5a27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxTime: 0
+  currentTime: 0
+  canStartMethod: 0
+  startMethodRightAway: 0
+  startTimer: 0
+  multipleTimer: 0
+  timerCount: 0
+  maxTimeList: []
+  currentTimeList: []
+  canStartMethodList: 
+  startMethodRightAwayList: 
+  startTimerList: 
 --- !u!1 &8697791168714438590
 GameObject:
   m_ObjectHideFlags: 0
