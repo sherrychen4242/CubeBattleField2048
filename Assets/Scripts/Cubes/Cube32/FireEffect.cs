@@ -17,13 +17,21 @@ public class FireEffect : MonoBehaviour
         
         fireEffectTimerSetup = false;
         canFire = true;
+
+        timer.maxTime = timeTillDie;
+        timer.startMethodRightAway = false;
+        timer.StartTimer();
+
+        timer.AddTimer("FireEffectTimer", fireEffectiveTime, false);
+        timer.StartTimer("FireEffectTimer");
+        fireEffectTimerSetup = true;
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        if (!fireEffectTimerSetup)
+        /*if (!fireEffectTimerSetup)
         {
             timer.maxTime = timeTillDie;
             timer.startMethodRightAway = false;
@@ -32,7 +40,7 @@ public class FireEffect : MonoBehaviour
             timer.AddTimer("FireEffectTimer", fireEffectiveTime, false);
             timer.StartTimer("FireEffectTimer");
             fireEffectTimerSetup = true;
-        }
+        }*/
 
         if (timer.CanStartMethod)
         {

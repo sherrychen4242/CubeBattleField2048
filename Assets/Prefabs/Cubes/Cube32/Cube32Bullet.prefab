@@ -23826,11 +23826,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2702760524478932868}
   - component: {fileID: 2832378872700265590}
+  - component: {fileID: 2321956330202332285}
   - component: {fileID: 2831248088271555076}
   - component: {fileID: 2831248088271555077}
   - component: {fileID: 2831248088271555079}
   - component: {fileID: 2831248088271555078}
-  - component: {fileID: 2321956330202332285}
   m_Layer: 0
   m_Name: Cube32Bullet
   m_TagString: Untagged
@@ -28431,6 +28431,19 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!135 &2321956330202332285
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2705192636594820756}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.75
+  m_Center: {x: 0, y: 1.1102232e-15, z: -0.0000000093132275}
 --- !u!199 &2831248088271555076
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -28559,16 +28572,3 @@ MonoBehaviour:
   timer: {fileID: 2831248088271555079}
   bulletDamage: 32
   fireEffect: {fileID: 6081578419035963267, guid: ed1c96727a6f21642ae08f0c93db1c4f, type: 3}
---- !u!135 &2321956330202332285
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2705192636594820756}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.75
-  m_Center: {x: 0, y: 1.1102232e-15, z: -0.0000000093132275}
