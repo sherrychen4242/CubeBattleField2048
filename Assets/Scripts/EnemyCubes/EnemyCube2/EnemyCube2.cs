@@ -11,6 +11,7 @@ public class EnemyCube2 : MonoBehaviour
     [SerializeField] string playerTag;
     [SerializeField] string playerCubeTag;
     [SerializeField] int damageAmount;
+    [SerializeField] GameObject bulletHitBloodEffect;
     #endregion
 
     #region PRIVATE VARIABLES
@@ -31,6 +32,11 @@ public class EnemyCube2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (target == null)
+        {
+            target = FindClosestCube();
+        }
+
         MoveTowardsPlayer();
 
         
@@ -175,6 +181,10 @@ public class EnemyCube2 : MonoBehaviour
                     dir = (dir.normalized) * 5f;
                     cube.GetComponentInParent<CubeMovement>().KickBack(dir);
                     healthScripts[targetPlayerIndex].TakeDamage(damageAmount);
+                    // Blood Effect
+                    GameObject blood = Instantiate(bulletHitBloodEffect, cube.transform.position - dir.normalized * cube.transform.localScale.x / 2, Quaternion.EulerAngles(0, -90, 0));
+                    blood.transform.forward = -dir.normalized;
+                    blood.transform.localScale *= cube.transform.localScale.x;
                 }
                 
             }

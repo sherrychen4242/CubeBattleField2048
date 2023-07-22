@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyCube4 : MonoBehaviour
+public class EnemyCube8 : MonoBehaviour
 {
     #region PUBLIC VARIABLES
     [SerializeField] UnityEngine.AI.NavMeshAgent agent;
@@ -11,7 +11,11 @@ public class EnemyCube4 : MonoBehaviour
     [SerializeField] string playerTag;
     [SerializeField] string playerCubeTag;
     [SerializeField] int damageAmount;
-    [SerializeField] GameObject bulletHitBloodEffect;
+    [SerializeField] GameObject bulletPrefab;
+    [SerializeField] float bulletSpeed;
+    [SerializeField] float bulletCoolDownTime;
+    public float currentTime;
+    public bool canShoot;
     #endregion
 
     #region PRIVATE VARIABLES
@@ -20,6 +24,7 @@ public class EnemyCube4 : MonoBehaviour
     public GameObject target;
     public float distanceToTarget;
     public bool tooClose;
+    
 
     #endregion
     // Start is called before the first frame update
@@ -29,27 +34,46 @@ public class EnemyCube4 : MonoBehaviour
         agent.updateRotation = false;
         startSteppingBack = false;
         startApproachTarget = true;
+        canShoot = false;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (currentTime < bulletCoolDownTime)
+        {
+            currentTime += Time.deltaTime;
+        }
+        else
+        {
+            currentTime = 0f;
+            canShoot = true;
+        }
+
         if (target != null)
         {
             float distance = Vector3.Distance(transform.position, target.transform.position);
             distanceToTarget = distance;
-            if (distance <= 20f)
+            if (distance <= 35f)
             {
                 tooClose = true;
                 if (agent.isActiveAndEnabled)
                 {
                     agent.ResetPath();
                     agent.enabled = false;
-
-                    Vector3 dir = target.transform.position - transform.position;
-                    GetComponent<Rigidbody>().AddForce(dir * 2f, ForceMode.VelocityChange);
                 }
                 
+                if (canShoot)
+                {
+                    Debug.Log("shooting!");
+                    Vector3 dir = target.transform.position - transform.position;
+                    Vector3 bulletPosition = transform.position + dir.normalized * gameObject.transform.localScale.x * 1.1f;
+                    GameObject bullet = Instantiate(bulletPrefab, bulletPosition, Quaternion.identity);
+                    bullet.GetComponent<Rigidbody>().AddForce(dir.normalized * bulletSpeed, ForceMode.VelocityChange);
+                    canShoot = false;
+                }
+
             }
             else
             {
@@ -211,10 +235,6 @@ public class EnemyCube4 : MonoBehaviour
                     dir = (dir.normalized) * 5f;
                     cube.GetComponentInParent<CubeMovement>().KickBack(dir);
                     healthScripts[targetPlayerIndex].TakeDamage(damageAmount);
-                    // Blood Effect
-                    GameObject blood = Instantiate(bulletHitBloodEffect, cube.transform.position - dir.normalized * cube.transform.localScale.x / 2, Quaternion.EulerAngles(0, -90, 0));
-                    blood.transform.forward = -dir.normalized;
-                    blood.transform.localScale *= cube.transform.localScale.x;
                 }
 
             }
