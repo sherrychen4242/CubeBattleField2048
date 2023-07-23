@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class EnemyCube8 : MonoBehaviour
+public class EnemyCube16 : MonoBehaviour
 {
     #region PUBLIC VARIABLES
     [SerializeField] UnityEngine.AI.NavMeshAgent agent;
@@ -24,7 +23,7 @@ public class EnemyCube8 : MonoBehaviour
     public GameObject target;
     public float distanceToTarget;
     public bool tooClose;
-    
+
 
     #endregion
     // Start is called before the first frame update
@@ -35,7 +34,7 @@ public class EnemyCube8 : MonoBehaviour
         startSteppingBack = false;
         startApproachTarget = true;
         canShoot = false;
-        
+
     }
 
     // Update is called once per frame
@@ -63,7 +62,7 @@ public class EnemyCube8 : MonoBehaviour
                     agent.ResetPath();
                     agent.enabled = false;
                 }
-                
+
                 if (canShoot)
                 {
                     Vector3 dir = target.transform.position - transform.position;

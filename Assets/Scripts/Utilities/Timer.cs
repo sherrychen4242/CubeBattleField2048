@@ -112,26 +112,29 @@ public class Timer : MonoBehaviour
     void Update()
     {
         // Default Timer
-        if (!startTimer)
+        if (!startTimer && timerCount == 1)
         {
             return;
         }
 
-        if (currentTime < maxTime)
+        if (startTimer)
         {
-            canStartMethod = false;
-            canStartMethodList[0] = false;
-            currentTime += Time.deltaTime;
-            currentTimeList[0] += Time.deltaTime;
+            if (currentTime < maxTime)
+            {
+                canStartMethod = false;
+                canStartMethodList[0] = false;
+                currentTime += Time.deltaTime;
+                currentTimeList[0] += Time.deltaTime;
+            }
+            else
+            {
+                currentTime = 0f;
+                currentTimeList[0] = 0f;
+                canStartMethod = true;
+                canStartMethodList[0] = true;
+            }
         }
-        else
-        {
-            currentTime = 0f;
-            currentTimeList[0] = 0f;
-            canStartMethod = true;
-            canStartMethodList[0] = true;
-        }
-
+        
         // Multiple Timer
         if (multipleTimer)
         {
