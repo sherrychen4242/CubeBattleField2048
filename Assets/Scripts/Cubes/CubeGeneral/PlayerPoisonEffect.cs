@@ -11,6 +11,10 @@ public class PlayerPoisonEffect : MonoBehaviour
     public bool poisonEffectFlag;
     public bool timerSetUp;
     public Material origMaterial;
+    public bool spiderEffect;
+    public float origSpeed;
+    [Range(0.1f, 0.9f)]
+    [SerializeField] float slowDownPercentage;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +22,9 @@ public class PlayerPoisonEffect : MonoBehaviour
         poisonEffectFlag = false;
         timerSetUp = false;
         origMaterial = GetComponent<Renderer>().material;
+
+        origSpeed = GameObject.FindGameObjectWithTag("Player").GetComponent<CubeMovement>().moveSpeed;
+        spiderEffect = false;
     }
 
     // Update is called once per frame
@@ -36,11 +43,18 @@ public class PlayerPoisonEffect : MonoBehaviour
             if (timer.CanStartMethodForTimer("PoisonTimer"))
             {
                 PoisonDamage();
+                if (spiderEffect &&
+                    !GameObject.FindGameObjectWithTag("Player").GetComponent<CubeMovement>().speedChanged)
+                {
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<CubeMovement>().moveSpeed = origSpeed * slowDownPercentage;
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<CubeMovement>().speedChanged = true;
+                }
             }
         }
         else
         {
             GetComponent<Renderer>().material = origMaterial;
+            
         }
 
         CheckWhetherPoisoned();
@@ -58,7 +72,8 @@ public class PlayerPoisonEffect : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(transform.position, transform.localScale.x + 1);
         foreach (Collider collider in colliders)
         {
-            if (collider.gameObject.GetComponent<EnemyPoisonEffect>() != null)
+            if (collider.gameObject.GetComponent<EnemyPoisonEffect>() != null ||
+                collider.gameObject.GetComponent<SpidernetEffect>() != null)
             {
                 poisonEffectColliders.Add(collider);
                 poisonNearby = true;
@@ -70,6 +85,8 @@ public class PlayerPoisonEffect : MonoBehaviour
         {
             poisonEffectFlag = false;
             GetComponent<Renderer>().material = origMaterial;
+            
+
         }
 
         if (poisonNearby)
@@ -77,16 +94,29 @@ public class PlayerPoisonEffect : MonoBehaviour
             bool poisonTakingEffect = false;
             foreach (Collider collider in poisonEffectColliders)
             {
-                if (!collider.gameObject.GetComponent<EnemyPoisonEffect>().timer.CanStartMethod)
+                if (collider.gameObject.GetComponent<EnemyPoisonEffect>() != null)
                 {
-                    poisonTakingEffect = true;
-                    break;
+                    if (!collider.gameObject.GetComponent<EnemyPoisonEffect>().timer.CanStartMethod)
+                    {
+                        poisonTakingEffect = true;
+                        break;
+                    }
                 }
+                else if (collider.gameObject.GetComponent<SpidernetEffect>() != null)
+                {
+                    if (!collider.gameObject.GetComponent<SpidernetEffect>().timer.CanStartMethod)
+                    {
+                        poisonTakingEffect = true;
+                        break;
+                    }
+                }
+                
             }
             if (!poisonTakingEffect)
             {
                 poisonEffectFlag = false;
                 GetComponent<Renderer>().material = origMaterial;
+                
             }
         }
     }

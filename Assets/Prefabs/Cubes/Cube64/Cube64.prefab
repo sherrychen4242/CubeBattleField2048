@@ -151,7 +151,7 @@ GameObject:
   - component: {fileID: 4969946030999289821}
   - component: {fileID: 4969946030999289817}
   - component: {fileID: 7312463613111073384}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube64
   m_TagString: PlayerCube
   m_Icon: {fileID: 0}
@@ -319,6 +319,9 @@ MonoBehaviour:
   poisonEffectFlag: 0
   timerSetUp: 0
   origMaterial: {fileID: 0}
+  spiderEffect: 0
+  origSpeed: 0
+  slowDownPercentage: 0.5
 --- !u!1 &4969946031180533617
 GameObject:
   m_ObjectHideFlags: 0

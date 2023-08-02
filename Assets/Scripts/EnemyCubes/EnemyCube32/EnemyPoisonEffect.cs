@@ -35,7 +35,7 @@ public class EnemyPoisonEffect : MonoBehaviour
         {
             gameObject.GetComponent<ParticleSystem>().Stop();
             gameObject.GetComponentInChildren<ParticleSystem>().Stop();
-            Collider[] playerCubes = Physics.OverlapSphere(gameObject.transform.position, 2f);
+            Collider[] playerCubes = Physics.OverlapSphere(gameObject.transform.position, 2f, LayerMask.NameToLayer("PlayerCube"));
             foreach (Collider collider in playerCubes)
             {
                 if (collider.gameObject.GetComponent<PlayerPoisonEffect>() is not null)

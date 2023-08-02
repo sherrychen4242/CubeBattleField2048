@@ -7,8 +7,10 @@ public class CubeMovement : MonoBehaviour
 {
     #region PUBLIC VARIABLES
     [Header("Movement")]
-    [SerializeField] float moveSpeed;
-    [SerializeField] float groundDrag;
+    public float moveSpeed;
+    public float groundDrag;
+    // Used to keep track whether any player cubes have made player change its speed so the other cubes can't make it change speed again
+    public bool speedChanged;
 
     public bool jumpKeyPressed;
     [SerializeField] float jumpForce;
@@ -23,6 +25,8 @@ public class CubeMovement : MonoBehaviour
     #endregion
 
     #region PRIVATE VARIABLES
+    [HideInInspector]
+    public float origSpeed;
     public Rigidbody rb;
     public float horizontalInput;
     public float verticalInput;
@@ -36,12 +40,17 @@ public class CubeMovement : MonoBehaviour
         rb.freezeRotation = true;
         readyToJump = true;
 
+        speedChanged = false;
+        origSpeed = moveSpeed;
+
         /*initialYPosition = transform.position.y;*/
     }
 
     // Update is called once per frame
     void Update()
     {
+        CheckWhetherSlowDown();
+
         GetInput();
         SpeedControl();
         if (GroundCheck())
@@ -122,5 +131,24 @@ public class CubeMovement : MonoBehaviour
     public void KickBack(Vector3 dir)
     {
         rb.AddForce(dir, ForceMode.Impulse);
+    }
+
+    private void CheckWhetherSlowDown()
+    {
+        GameObject[] cubes = GameObject.FindGameObjectsWithTag("PlayerCube");
+        bool slowDown = false;
+        foreach (GameObject cube in cubes)
+        {
+            if (cube.GetComponent<PlayerPoisonEffect>().spiderEffect)
+            {
+                slowDown = true;
+                break;
+            }
+        }
+        if (!slowDown)
+        {
+            speedChanged = false;
+            moveSpeed = origSpeed;
+        }
     }
 }
