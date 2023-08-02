@@ -16,7 +16,7 @@ public class Cube64Shooting : CubeShooting
     {
         GameObject bullet = Instantiate(bulletPrefab, bulletPos.position, Quaternion.identity);
 
-        Vector3 dir = new Vector3(mousePosition.x - transform.position.x, 0f, mousePosition.z - transform.position.z);
+        Vector3 dir = new Vector3(mousePosition.x - transform.position.x, bulletPos.position.y, mousePosition.z - transform.position.z);
         bullet.GetComponent<Rigidbody>().AddForce(dir.normalized * bulletSpeed, ForceMode.VelocityChange);
     }
 }

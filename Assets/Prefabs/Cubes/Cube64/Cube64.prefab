@@ -150,6 +150,7 @@ GameObject:
   - component: {fileID: 4969946030999289822}
   - component: {fileID: 4969946030999289821}
   - component: {fileID: 4969946030999289817}
+  - component: {fileID: 7312463613111073384}
   m_Layer: 0
   m_Name: Cube64
   m_TagString: PlayerCube
@@ -276,6 +277,7 @@ MonoBehaviour:
   currentHealth: 0
   bloodSplashEffect: {fileID: 1799810784756815943, guid: 3c9d975074c114121815c23e7bc8c80e, type: 3}
   coinPrefab: {fileID: 0}
+  oneLevelLowerCube: {fileID: 0}
 --- !u!114 &4969946030999289817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -299,6 +301,24 @@ MonoBehaviour:
   timer: {fileID: 4969946030999289822}
   mousePosition: {x: 0, y: 0, z: 0}
   isLeftMouseButtonDown: 0
+--- !u!114 &7312463613111073384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4969946030999289812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3cfad094fba1e745b27e33828268e72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer: {fileID: 4969946030999289822}
+  poisonEffectDamagePerSecond: 1
+  poisonMaterial: {fileID: 2100000, guid: 092a1054f3d80e640aef045e625b53af, type: 2}
+  poisonEffectFlag: 0
+  timerSetUp: 0
+  origMaterial: {fileID: 0}
 --- !u!1 &4969946031180533617
 GameObject:
   m_ObjectHideFlags: 0

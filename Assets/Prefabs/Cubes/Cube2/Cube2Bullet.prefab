@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 7918693660321527730}
   m_Layer: 0
   m_Name: Cube2Bullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -148,3 +148,10 @@ MonoBehaviour:
   canStartMethod: 0
   startMethodRightAway: 0
   startTimer: 0
+  multipleTimer: 0
+  timerCount: 0
+  maxTimeList: []
+  currentTimeList: []
+  canStartMethodList: 
+  startMethodRightAwayList: 
+  startTimerList: 
