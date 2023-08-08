@@ -32,7 +32,7 @@ public class EnemyCube8Bullet : MonoBehaviour
         if (collision.gameObject.CompareTag("PlayerCube"))
         {
             GameObject player = collision.gameObject;
-            if (player.GetComponent<Health>() != null)
+            if (player.GetComponentInParent<Player>() != null)
             {
 
                 
@@ -40,7 +40,7 @@ public class EnemyCube8Bullet : MonoBehaviour
                 GameObject blood = Instantiate(bulletHitBloodEffect, collision.transform.position + dir.normalized * collision.gameObject.transform.localScale.x/2, Quaternion.EulerAngles(0, -90, 0));
                 blood.transform.forward = dir.normalized;
                 blood.transform.localScale *= collision.gameObject.transform.localScale.x / 2;
-                player.GetComponent<Health>().TakeDamage(bulletDamage);
+                player.GetComponentInParent<Player>().TakeDamage(bulletDamage);
                 Destroy(gameObject);
             }
         }

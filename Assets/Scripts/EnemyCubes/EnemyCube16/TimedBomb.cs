@@ -50,9 +50,9 @@ public class TimedBomb : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
         foreach (Collider collider in colliders)
         {
-            if (collider.gameObject.CompareTag("PlayerCube") && collider.gameObject.GetComponent<Health>() != null)
+            if (collider.gameObject.CompareTag("PlayerCube") && collider.gameObject.GetComponentInParent<Player>() != null)
             {
-                collider.gameObject.GetComponent<Health>().TakeDamage(explosionDamage);
+                collider.gameObject.GetComponentInParent<Player>().TakeDamage(explosionDamage);
             }
         }
     }

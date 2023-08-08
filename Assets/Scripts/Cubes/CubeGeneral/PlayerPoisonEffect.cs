@@ -62,7 +62,7 @@ public class PlayerPoisonEffect : MonoBehaviour
 
     private void PoisonDamage()
     {
-        gameObject.GetComponent<Health>()?.TakeDamage(poisonEffectDamagePerSecond);
+        gameObject.GetComponentInParent<Player>()?.TakeDamage(poisonEffectDamagePerSecond);
     }
 
     private void CheckWhetherPoisoned()

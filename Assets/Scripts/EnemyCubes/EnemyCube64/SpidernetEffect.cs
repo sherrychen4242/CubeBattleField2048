@@ -109,10 +109,10 @@ public class SpidernetEffect : MonoBehaviour
     {
         if (other.gameObject.CompareTag("PlayerCube"))
         {
-            Debug.Log("Entered!");
+            //Debug.Log("Entered!");
             if (other.gameObject.GetComponent<PlayerPoisonEffect>() != null)
             {
-                Debug.Log("Entered2!");
+                //Debug.Log("Entered2!");
                 if (!timer.CanStartMethodForTimer("PoisonEffectTimer"))
                 {
                     if (canPoison)

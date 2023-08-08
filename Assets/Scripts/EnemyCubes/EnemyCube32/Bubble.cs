@@ -48,9 +48,13 @@ public class Bubble : MonoBehaviour
     {
         if (other.gameObject.CompareTag("PlayerCube"))
         {
-            other.gameObject.GetComponent<Health>().TakeDamage(damage);
-            Instantiate(poisonEffect, transform.position, Quaternion.identity);
-            Destroy(gameObject);
+            if (other.gameObject.GetComponentInParent<Player>() != null)
+            {
+                other.gameObject.GetComponentInParent<Player>().TakeDamage(damage);
+                Instantiate(poisonEffect, transform.position, Quaternion.identity);
+                Destroy(gameObject);
+            }
+            
         }
         else if (other.gameObject.CompareTag("Bullet"))
         {
