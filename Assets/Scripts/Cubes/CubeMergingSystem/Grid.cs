@@ -119,12 +119,23 @@ public class Grid : MonoBehaviour
                             if (numCubesForEach[i] < numCubesForEachPreFrame[i])
                             {
                                 // When cubes are deleted
-                                GameObject disappearEffect = Instantiate(cubeDisappearEffect, cubeList[i][0].transform.position, Quaternion.identity);
-                                disappearEffect.transform.localScale = new Vector3(cubeList[i][0].transform.localScale.x,
-                                    cubeList[i][0].transform.localScale.y,
-                                    cubeList[i][0].transform.localScale.z);
-                                DestroyImmediate(cubeList[i][0]);
-                                cubeList[i].RemoveAt(0);
+                                if (cubeList[i].Count > 0)
+                                {
+                                    for (int b = 0; b < cubeList[i].Count; b++)
+                                    {
+                                        if (cubeList[i][b] != null)
+                                        {
+                                            GameObject disappearEffect = Instantiate(cubeDisappearEffect, cubeList[i][b].transform.position, Quaternion.identity);
+                                            disappearEffect.transform.localScale = new Vector3(cubeList[i][b].transform.localScale.x,
+                                                cubeList[i][b].transform.localScale.y,
+                                                cubeList[i][b].transform.localScale.z);
+                                            DestroyImmediate(cubeList[i][b]);
+                                            cubeList[i].RemoveAt(b);
+                                        }
+                                        
+                                    }
+                                    
+                                }
                                 
                             }
                         }
@@ -134,12 +145,24 @@ public class Grid : MonoBehaviour
                             if (numCubesForEach[0] < numCubesForEachPreFrame[0])
                             {
                                 // When cubes are deleted
-                                GameObject disappearEffect = Instantiate(cubeDisappearEffect, cubeList[0][-1].transform.position, Quaternion.identity);
-                                disappearEffect.transform.localScale = new Vector3(cubeList[0][-1].transform.localScale.x,
-                                    cubeList[0][-1].transform.localScale.y,
-                                    cubeList[0][-1].transform.localScale.z);
-                                DestroyImmediate(cubeList[0][-1]);
-                                cubeList[0].RemoveAt(-1);
+                                if (cubeList[0].Count > 0)
+                                {
+                                    for (int t = 0; t < cubeList[0].Count; t++)
+                                    {
+                                        if (cubeList[0][t] != null)
+                                        {
+                                            Vector3 instantiatePos = cubeList[0][t].transform.position;
+                                            GameObject disappearEffect = Instantiate(cubeDisappearEffect, instantiatePos, Quaternion.identity);
+                                            disappearEffect.transform.localScale = new Vector3(cubeList[0][t].transform.localScale.x,
+                                                cubeList[0][t].transform.localScale.y,
+                                                cubeList[0][t].transform.localScale.z);
+                                            DestroyImmediate(cubeList[0][t]);
+                                            cubeList[0].RemoveAt(t);
+                                            break;
+                                        }
+                                    }
+                                    
+                                }
                                 
                             }
                         }

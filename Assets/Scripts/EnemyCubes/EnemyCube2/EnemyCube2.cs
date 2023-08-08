@@ -153,6 +153,48 @@ public class EnemyCube2 : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(playerTag))
         {
+            if (collision.gameObject.GetComponent<Player>() != null)
+            {
+                collision.gameObject.GetComponent<Player>().TakeDamage(damageAmount);
+            }
+
+            if (collision.gameObject.GetComponentsInChildren<Health>().Length > 0)
+            {
+                Health[] healthScripts = collision.gameObject.GetComponentsInChildren<Health>();
+                float minDistance = Mathf.Infinity;
+                int targetPlayerIndex = 0;
+                for (int i = 0; i < healthScripts.Length; i++)
+                {
+                    Health healthScript = healthScripts[i];
+                    float distance = Vector3.Distance(transform.position, healthScript.gameObject.transform.position);
+                    if (distance < minDistance)
+                    {
+                        minDistance = distance;
+                        targetPlayerIndex = i;
+                    }
+                }
+                float playerCubeScale = healthScripts[targetPlayerIndex].gameObject.transform.localScale.x;
+                float enemyScale = gameObject.transform.localScale.x;
+                if (minDistance < ((playerCubeScale + enemyScale) / 2f) * Mathf.Sqrt(2f) * 1.3f)
+                {
+                    GameObject cube = healthScripts[targetPlayerIndex].gameObject;
+                    Vector3 dir = cube.transform.position - gameObject.transform.position;
+                    dir = (dir.normalized) * 5f;
+                    cube.GetComponentInParent<CubeMovement>().KickBack(dir);
+                    //healthScripts[targetPlayerIndex].TakeDamage(damageAmount);
+                    // Blood Effect
+                    GameObject blood = Instantiate(bulletHitBloodEffect, cube.transform.position - dir.normalized * cube.transform.localScale.x / 2, Quaternion.EulerAngles(0, -90, 0));
+                    blood.transform.forward = -dir.normalized;
+                    blood.transform.localScale *= cube.transform.localScale.x;
+                }
+            }
+        }
+    }
+
+    private void CauseDamageToHealthScript(Collision collision)
+    {
+        if (collision.gameObject.CompareTag(playerTag))
+        {
             if (collision.gameObject.GetComponent<Health>() != null)
             {
                 collision.gameObject.GetComponent<Health>().TakeDamage(damageAmount);
@@ -186,7 +228,6 @@ public class EnemyCube2 : MonoBehaviour
                     blood.transform.forward = -dir.normalized;
                     blood.transform.localScale *= cube.transform.localScale.x;
                 }
-                
             }
         }
     }

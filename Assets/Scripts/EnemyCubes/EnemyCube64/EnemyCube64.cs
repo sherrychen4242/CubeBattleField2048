@@ -209,11 +209,12 @@ public class EnemyCube64 : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(playerTag))
         {
-            if (collision.gameObject.GetComponent<Health>() != null)
+            if (collision.gameObject.GetComponent<Player>() != null)
             {
-                collision.gameObject.GetComponent<Health>().TakeDamage(damageAmount);
+                collision.gameObject.GetComponent<Player>().TakeDamage(damageAmount);
             }
-            else if (collision.gameObject.GetComponentsInChildren<Health>().Length > 0)
+
+            if (collision.gameObject.GetComponentsInChildren<Health>().Length > 0)
             {
                 Health[] healthScripts = collision.gameObject.GetComponentsInChildren<Health>();
                 float minDistance = Mathf.Infinity;
@@ -236,9 +237,12 @@ public class EnemyCube64 : MonoBehaviour
                     Vector3 dir = cube.transform.position - gameObject.transform.position;
                     dir = (dir.normalized) * 5f;
                     cube.GetComponentInParent<CubeMovement>().KickBack(dir);
-                    healthScripts[targetPlayerIndex].TakeDamage(damageAmount);
+                    //healthScripts[targetPlayerIndex].TakeDamage(damageAmount);
+                    // Blood Effect
+                    //GameObject blood = Instantiate(bulletHitBloodEffect, cube.transform.position - dir.normalized * cube.transform.localScale.x / 2, Quaternion.EulerAngles(0, -90, 0));
+                    //blood.transform.forward = -dir.normalized;
+                    //blood.transform.localScale *= cube.transform.localScale.x;
                 }
-
             }
         }
     }

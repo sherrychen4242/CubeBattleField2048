@@ -27,4 +27,9 @@ public class Player : MonoBehaviour
     {
         currentNumber += 2;
     }
+
+    public void TakeDamage(int damageAmount)
+    {
+        currentNumber -= damageAmount;
+    }
 }
