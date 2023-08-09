@@ -14,6 +14,7 @@ public class Grid : MonoBehaviour
     private List<float> cubeHalfLengthList = new List<float> { 3f, 2.5f, 2f, 1.5f, 1f, 0.5f };
     [SerializeField] GameObject cubeAppearEffect;
     [SerializeField] GameObject cubeDisappearEffect;
+    public bool obstacleEncountered;
 
     [Header("Cube Lists")]
     public List<List<GameObject>> cubeList = new List<List<GameObject>>();
@@ -21,7 +22,7 @@ public class Grid : MonoBehaviour
     [Header("Cell Related")]
     [SerializeField] GameObject cellPrefab;
     [SerializeField] GameObject cellPointIndicatorPrefab;
-    [SerializeField] float cubeGapWidth;
+    public float cubeGapWidth;
     public int largestCubeSideLength;
 
     [Header("Cube Prefabs")]
@@ -78,11 +79,27 @@ public class Grid : MonoBehaviour
         cubePrefabList.Add(cube2Prefab);
 
         numCubesPreFrame = 0;
+
+        obstacleEncountered = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Check whether encounter obstacle
+        foreach (GameObject cube in GameObject.FindGameObjectsWithTag("PlayerCube"))
+        {
+            if (!cube.GetComponent<CubeMove>().obstacleEncountered)
+            {
+                obstacleEncountered = false;
+            }
+            else
+            {
+                obstacleEncountered = true;
+                break;
+            }
+        }
+
         int currentHealth = FindObjectOfType<Player>().currentNumber;
         CalculateNumberOfCubes(currentHealth);
         if (ListMatch(numCubesForEach, numCubesForEachPreFrame))
@@ -222,10 +239,8 @@ public class Grid : MonoBehaviour
         }
         
         numCubesForEachPreFrame = numCubesForEach;
-    }
 
-    private void FixedUpdate()
-    {
+        //
         GameObject[] playerCubes = GameObject.FindGameObjectsWithTag("PlayerCube");
         int numCubesCurrentFrame = playerCubes.Length;
         
@@ -294,8 +309,6 @@ public class Grid : MonoBehaviour
                 tempList.Add(tuple.Item2);
             }
 
-            
-
             List<Vector3> positionList = CalculateCubePositionsFixedUpdate(playerCubes.Length, largestCubeSize, centerPoint);
             for (int i = 0; i < positionList.Count; i++)
             {
@@ -328,6 +341,12 @@ public class Grid : MonoBehaviour
         }
 
         numCubesPreFrame = numCubesCurrentFrame;
+
+    }
+
+    private void FixedUpdate()
+    {
+        
     }
 
     private void CalculateNumberOfCubes(int number)

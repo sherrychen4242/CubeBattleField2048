@@ -9,6 +9,7 @@ TagManager:
   - PlayerCube
   - FxTemporaire
   - Bullet
+  - Obstacle
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - Ground
   - Enemy
   - PlayerCube
-  - 
+  - Obstacle
   - 
   - 
   - 

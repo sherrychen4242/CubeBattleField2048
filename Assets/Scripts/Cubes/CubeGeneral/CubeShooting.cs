@@ -55,11 +55,13 @@ public class CubeShooting : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, whatIsGround))
+        if (Physics.Raycast(ray, out hit))
         {
             Vector3 hitPos = hit.point;
             mousePosition = new Vector3(hitPos.x, transform.position.y, hitPos.z);
         }
+
+        //mousePosition = new Vector3(Input.mousePosition.x, transform.position.y, Input.mousePosition.y);
     }
 
     private void ChangeArrowOrientation()
