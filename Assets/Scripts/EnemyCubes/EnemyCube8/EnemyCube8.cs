@@ -24,7 +24,7 @@ public class EnemyCube8 : MonoBehaviour
     public GameObject target;
     public float distanceToTarget;
     public bool tooClose;
-    
+
 
     #endregion
     // Start is called before the first frame update
@@ -35,7 +35,7 @@ public class EnemyCube8 : MonoBehaviour
         startSteppingBack = false;
         startApproachTarget = true;
         canShoot = false;
-        
+
     }
 
     // Update is called once per frame
@@ -63,7 +63,7 @@ public class EnemyCube8 : MonoBehaviour
                     agent.ResetPath();
                     agent.enabled = false;
                 }
-                
+
                 if (canShoot)
                 {
                     Vector3 dir = target.transform.position - transform.position;
@@ -204,16 +204,22 @@ public class EnemyCube8 : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag(playerTag))
+        if (collision.gameObject.CompareTag(playerTag) || collision.gameObject.CompareTag(playerCubeTag))
         {
             if (collision.gameObject.GetComponent<Player>() != null)
             {
                 collision.gameObject.GetComponent<Player>().TakeDamage(damageAmount);
             }
-
-            if (collision.gameObject.GetComponentsInChildren<Health>().Length > 0)
+            else if (collision.gameObject.GetComponentInParent<Player>() != null)
             {
-                Health[] healthScripts = collision.gameObject.GetComponentsInChildren<Health>();
+                collision.gameObject.GetComponentInParent<Player>().TakeDamage(damageAmount);
+            }
+
+
+            if (collision.gameObject.GetComponentsInChildren<Health>().Length > 0 ||
+                collision.gameObject.GetComponent<Health>() != null)
+            {
+                Health[] healthScripts = FindObjectsOfType<Health>();
                 float minDistance = Mathf.Infinity;
                 int targetPlayerIndex = 0;
                 for (int i = 0; i < healthScripts.Length; i++)
@@ -233,7 +239,7 @@ public class EnemyCube8 : MonoBehaviour
                     GameObject cube = healthScripts[targetPlayerIndex].gameObject;
                     Vector3 dir = cube.transform.position - gameObject.transform.position;
                     dir = (dir.normalized) * 5f;
-                    cube.GetComponentInParent<CubeMovement>().KickBack(dir);
+                    FindObjectOfType<CubeMovement>().KickBack(dir);
                     //healthScripts[targetPlayerIndex].TakeDamage(damageAmount);
                     // Blood Effect
                     //GameObject blood = Instantiate(bulletHitBloodEffect, cube.transform.position - dir.normalized * cube.transform.localScale.x / 2, Quaternion.EulerAngles(0, -90, 0));

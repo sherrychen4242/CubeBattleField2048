@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
+//[RequireComponent(typeof(Rigidbody))]
 public class CubeMovement : MonoBehaviour
 {
     #region PUBLIC VARIABLES
@@ -11,6 +11,7 @@ public class CubeMovement : MonoBehaviour
     public float groundDrag;
     // Used to keep track whether any player cubes have made player change its speed so the other cubes can't make it change speed again
     public bool speedChanged;
+    [SerializeField] Vector3 acceleration;
 
     public bool jumpKeyPressed;
     [SerializeField] float jumpForce;
@@ -27,21 +28,32 @@ public class CubeMovement : MonoBehaviour
     #region PRIVATE VARIABLES
     [HideInInspector]
     public float origSpeed;
-    public Rigidbody rb;
+    public Rigidbody[] cubeRBs;
     public float horizontalInput;
     public float verticalInput;
     public Vector3 moveDirection;
+    public Vector3 kickBackDir;
+    public bool isKickBack;
+
    /* public float initialYPosition;*/
     #endregion
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        rb.freezeRotation = true;
+        cubeRBs = GetComponentsInChildren<Rigidbody>();
+        foreach (Rigidbody rb in cubeRBs)
+        {
+            rb.freezeRotation = true;
+        }
+        
         readyToJump = true;
 
         speedChanged = false;
         origSpeed = moveSpeed;
+
+        isKickBack = false;
+
+        acceleration = Vector3.zero;
 
         /*initialYPosition = transform.position.y;*/
     }
@@ -49,6 +61,12 @@ public class CubeMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        cubeRBs = GetComponentsInChildren<Rigidbody>();
+        foreach (Rigidbody rb in cubeRBs)
+        {
+            rb.freezeRotation = true;
+        }
+
         CheckWhetherSlowDown();
 
         GetInput();
@@ -59,9 +77,20 @@ public class CubeMovement : MonoBehaviour
             grounded = false;
 
         if (grounded)
-            rb.drag = groundDrag;
+        {
+            foreach (Rigidbody rb in cubeRBs)
+            {
+                rb.drag = groundDrag;
+            }
+        }
+            
         else
-            rb.drag = 0f;
+        {
+            foreach (Rigidbody rb in cubeRBs)
+            {
+                rb.drag = 0f;
+            }
+        }
 
         /*if (!jumpKeyPressed)
         {
@@ -82,7 +111,13 @@ public class CubeMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        ChangeAcceleration();
         Move();
+
+        if (isKickBack)
+        {
+            transform.position += kickBackDir * moveSpeed * 2f * Time.deltaTime;
+        }
 
     }
 
@@ -93,14 +128,54 @@ public class CubeMovement : MonoBehaviour
         jumpKeyPressed = Input.GetKeyDown(KeyCode.Space);
     }
 
+    private void ChangeAcceleration()
+    {
+        Vector3 moveDir = Vector3.forward * verticalInput + Vector3.right * horizontalInput;
+        if (moveDir.magnitude > 0)
+        {
+            /*if (acceleration.magnitude < 20f)
+            {
+                acceleration += moveDir * Time.deltaTime * 20f;
+            }
+            else
+            {
+                acceleration = acceleration.normalized * 20f;
+            }*/
+            if (Vector3.Dot(moveDir, acceleration) >= 0)
+            {
+                acceleration += moveDir * Time.deltaTime * 20f;
+            }
+            else
+            {
+                acceleration = Vector3.zero;
+            }
+            if (acceleration.magnitude > 20f)
+            {
+                acceleration = acceleration.normalized * 20f;
+            }
+
+        }
+        else
+        {
+            if (acceleration.magnitude > 0f)
+            {
+                acceleration -= Time.deltaTime * acceleration;
+            }
+            else
+            {
+                acceleration = Vector3.zero;
+            }
+            
+        }
+        
+    }
+
     private void Move()
     {
         moveDirection = Vector3.forward * verticalInput + Vector3.right * horizontalInput;
-
-        if (grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
-        else if (!grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+        Vector3 newPos = transform.position + moveDirection * moveSpeed * Time.deltaTime + acceleration * moveSpeed * Mathf.Pow(Time.deltaTime, 2);
+        transform.position = Vector3.Lerp(transform.position, newPos, 1f);
+        
     }
 
     private bool GroundCheck()
@@ -110,18 +185,26 @@ public class CubeMovement : MonoBehaviour
 
     private void SpeedControl()
     {
-        Vector3 currentVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-        if (currentVel.magnitude > moveSpeed)
+
+        foreach (Rigidbody rb in cubeRBs)
         {
-            Vector3 limitedVel = currentVel.normalized * moveSpeed;
-            rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+            Vector3 currentVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+            if (currentVel.magnitude > moveSpeed)
+            {
+                Vector3 limitedVel = currentVel.normalized * moveSpeed;
+                rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+            }
         }
+        
     }
 
     private void Jump()
     {
-        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        foreach (Rigidbody rb in cubeRBs)
+        {
+            rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        }
     }
 
     private void ResetJump()
@@ -131,7 +214,20 @@ public class CubeMovement : MonoBehaviour
 
     public void KickBack(Vector3 dir)
     {
-        rb.AddForce(dir, ForceMode.Impulse);
+        /*foreach (Rigidbody rb in cubeRBs)
+        {
+            rb.AddForce(dir, ForceMode.Impulse);
+        }*/
+        kickBackDir = dir;
+        isKickBack = true;
+
+        Invoke("StopKickBack", 0.5f);
+        
+    }
+
+    public void StopKickBack()
+    {
+        isKickBack = false;
     }
 
     private void CheckWhetherSlowDown()

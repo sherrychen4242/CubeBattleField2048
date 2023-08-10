@@ -154,6 +154,7 @@ GameObject:
   - component: {fileID: 1251539657164503683}
   - component: {fileID: 6704122352382658078}
   - component: {fileID: 1430137612777437253}
+  - component: {fileID: -7633060660849245463}
   m_Layer: 8
   m_Name: Cube64
   m_TagString: PlayerCube
@@ -379,6 +380,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.2, y: 1.2, z: 1.2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &-7633060660849245463
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4969946030999289812}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 112
+  m_CollisionDetection: 3
 --- !u!1 &4969946031180533617
 GameObject:
   m_ObjectHideFlags: 0

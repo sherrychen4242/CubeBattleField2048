@@ -115,7 +115,9 @@ public class CubeMove : MonoBehaviour
                     sumVector += dir;
                 }
                 Vector3 newPosition = transform.position + sumVector.normalized * moveSpeed * Time.deltaTime;
+                //Vector3 newDir = transform.position + sumVector.normalized;
                 transform.position = Vector3.Lerp(transform.position, newPosition, 0.5f);
+                //GetComponent<Rigidbody>().AddForce(newDir * moveSpeed, ForceMode.Impulse);
                 //transform.position += sumVector.normalized * moveSpeed * Time.deltaTime;
             }
             else
@@ -143,6 +145,7 @@ public class CubeMove : MonoBehaviour
                     nudgeTime += Time.deltaTime;
                     if (nudgeTime < 0.5f)
                     {
+                        //GetComponent<Rigidbody>().AddForce(randomDir.normalized * moveSpeed, ForceMode.Impulse);
                         transform.position += randomDir.normalized * moveSpeed * Time.deltaTime;
                     }
                     else
@@ -155,6 +158,7 @@ public class CubeMove : MonoBehaviour
                 else
                 {
                     Vector3 newPosition = transform.position + (destination - transform.position).normalized * moveSpeed * Time.deltaTime;
+                    //GetComponent<Rigidbody>().AddForce((destination - transform.position).normalized * moveSpeed, ForceMode.VelocityChange);
                     //transform.position += (destination - transform.position).normalized * moveSpeed * Time.deltaTime;
                     transform.position = Vector3.Lerp(transform.position, newPosition, 0.5f);
                 }
