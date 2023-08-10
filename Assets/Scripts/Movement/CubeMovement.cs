@@ -77,6 +77,7 @@ public class CubeMovement : MonoBehaviour
             Jump();
             Invoke(nameof(ResetJump), jumpCoolDown);
         }
+
     }
 
     private void FixedUpdate()

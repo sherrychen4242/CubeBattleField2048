@@ -126,7 +126,7 @@ public class CubeMove : MonoBehaviour
                 {
                     return;
                 }
-                
+
                 if ((transform.position - previousPosition).magnitude < 0.1f)
                 {
                     staySamePlaceTime += Time.deltaTime;
@@ -137,7 +137,7 @@ public class CubeMove : MonoBehaviour
                         //print("nudge!");
                     }
                 }
-            
+
                 if (needNudge)
                 {
                     nudgeTime += Time.deltaTime;
@@ -150,7 +150,7 @@ public class CubeMove : MonoBehaviour
                         needNudge = false;
                         staySamePlaceTime = 0f;
                     }
-                
+
                 }
                 else
                 {
