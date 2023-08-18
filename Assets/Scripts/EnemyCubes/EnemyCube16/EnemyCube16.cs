@@ -40,6 +40,11 @@ public class EnemyCube16 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (transform.position.y > transform.localScale.x / 2f + 0.2f || transform.position.y < 0f)
+        {
+            transform.position = Vector3.zero;
+        }
+
         if (currentTime < bulletCoolDownTime)
         {
             currentTime += Time.deltaTime;

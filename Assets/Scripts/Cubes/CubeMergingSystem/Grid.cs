@@ -110,7 +110,7 @@ public class Grid : MonoBehaviour
         {
             
             List<Vector3> posList = CalculateCubePositions();
-
+            if (posList == null) return;
             for(int i = 0; i < posList.Count; i++)
             {
                 Vector3 pos = posList[i];
@@ -376,7 +376,7 @@ public class Grid : MonoBehaviour
     {
         if (totalNumCubes == 0)
         {
-            Debug.LogError("No cubes!");
+            //Debug.LogError("No cubes!");
             return null;
         }
 

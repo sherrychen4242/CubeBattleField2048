@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 //[RequireComponent(typeof(Rigidbody))]
 public class CubeMovement : MonoBehaviour
@@ -174,8 +175,65 @@ public class CubeMovement : MonoBehaviour
     {
         moveDirection = Vector3.forward * verticalInput + Vector3.right * horizontalInput;
         Vector3 newPos = transform.position + moveDirection * moveSpeed * Time.deltaTime + acceleration * moveSpeed * Mathf.Pow(Time.deltaTime, 2);
-        transform.position = Vector3.Lerp(transform.position, newPos, 1f);
+        CubeMove[] cubeMoves = FindObjectsOfType<CubeMove>();
+        foreach (CubeMove cm in cubeMoves)
+        {
+            if (!cm.onNavMesh)
+            {
+                Vector3 dir = transform.position - cm.outOfNavMeshPos;
+                transform.position += dir.normalized * moveSpeed * Time.deltaTime;
+                return;
+            }
+        }
+
+        transform.position = Vector3.Lerp(transform.position, newPos, 1f);        
         
+    }
+
+    private bool IsPositionOnNavMesh(Vector3 position)
+    {
+        NavMeshHit hit;
+
+        float smallestX = Mathf.Infinity;
+        float largestX = -Mathf.Infinity;
+        float smallestZ = Mathf.Infinity;
+        float largestZ = -Mathf.Infinity;
+        GameObject[] cubes = GameObject.FindGameObjectsWithTag("PlayerCube");
+        foreach(GameObject cube in cubes)
+        {
+            float halfSize = cube.transform.localScale.x / 2f;
+            Vector3 cubePosition = cube.transform.position + transform.position;
+            if (cubePosition.x - halfSize < smallestX)
+            {
+                smallestX = cubePosition.x - halfSize;
+            }
+
+            if (cubePosition.x + halfSize > largestX)
+            {
+                largestX = cubePosition.x + halfSize;
+            }
+
+            if (cubePosition.z - halfSize < smallestZ)
+            {
+                smallestZ = cubePosition.z - halfSize;
+            }
+
+            if (cubePosition.z + halfSize > largestZ)
+            {
+                largestZ = cubePosition.z + halfSize;
+            }
+        }
+        Vector3 position1 = new Vector3(smallestX, 0f, largestZ);
+        Vector3 position2 = new Vector3(largestX, 0f, largestZ);
+        Vector3 position3 = new Vector3(smallestX, 0f, smallestZ);
+        Vector3 position4 = new Vector3(largestX, 0f, smallestZ);
+
+        if (!(NavMesh.SamplePosition(position1, out hit, 0.1f, NavMesh.AllAreas) || NavMesh.SamplePosition(position1, out hit, 4f, NavMesh.AllAreas))) return false;
+        if (!(NavMesh.SamplePosition(position2, out hit, 0.1f, NavMesh.AllAreas) || NavMesh.SamplePosition(position2, out hit, 4f, NavMesh.AllAreas))) return false;
+        if (!(NavMesh.SamplePosition(position3, out hit, 0.1f, NavMesh.AllAreas) || NavMesh.SamplePosition(position3, out hit, 4f, NavMesh.AllAreas))) return false;
+        if (!(NavMesh.SamplePosition(position4, out hit, 0.1f, NavMesh.AllAreas) || NavMesh.SamplePosition(position4, out hit, 4f, NavMesh.AllAreas))) return false;
+
+        return true;
     }
 
     private bool GroundCheck()

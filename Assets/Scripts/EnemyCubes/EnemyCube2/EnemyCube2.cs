@@ -32,6 +32,11 @@ public class EnemyCube2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (transform.position.y > transform.localScale.x / 2f + 0.2f || transform.position.y < 0f)
+        {
+            transform.position = Vector3.zero;
+        }
+
         if (target == null)
         {
             target = FindClosestCube();

@@ -6,13 +6,18 @@ using UnityEngine.AI;
 public class CubeMove : MonoBehaviour
 {
     [SerializeField] float moveSpeed;
-    [SerializeField] NavMeshAgent agent;
+    //[SerializeField] NavMeshAgent agent;
     public Vector3 destinationVector;
     public Vector3 destination;
 
     public bool obstaclesNear;
     public float avoidObstaclesTime;
     public bool obstacleEncountered;
+
+    public bool onNavMesh = true;
+    public Vector3 outOfNavMeshPos;
+    public bool onGround = true;
+    public float groundCheckTimer = 0f;
 
     /*public bool isAvoidingCube;
     public float avoidingCubeCurrentTime;
@@ -31,7 +36,7 @@ public class CubeMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        agent.speed = moveSpeed;
+        //agent.speed = moveSpeed;
         /*isAvoidingCube = false;
         collidedWithCube = false;
         startCollidedWithCubeTimer = false;*/
@@ -76,6 +81,34 @@ public class CubeMove : MonoBehaviour
             agent.ResetPath();
             agent.isStopped = true;
         }*/
+        if (!GroundCheck())
+        {
+            if (groundCheckTimer < 2f)
+            {
+                onGround = true;
+                groundCheckTimer += Time.deltaTime;
+            }
+            else
+            {
+                groundCheckTimer = 0f;
+                onGround = false;
+            }
+        }
+        else
+        {
+            onGround = true;
+            groundCheckTimer = 0f;
+        }
+
+        if (IsPositionOnNavMesh())
+        {
+            onNavMesh = true;
+        }
+        else
+        {
+            onNavMesh = false;
+            return;
+        }
 
         destination = GameObject.FindGameObjectWithTag("Player").transform.position + destinationVector;
         if ((transform.position - destination).magnitude < 0.01f)
@@ -158,9 +191,10 @@ public class CubeMove : MonoBehaviour
                 else
                 {
                     Vector3 newPosition = transform.position + (destination - transform.position).normalized * moveSpeed * Time.deltaTime;
+                    newPosition.y = transform.localScale.x / 2f;
                     //GetComponent<Rigidbody>().AddForce((destination - transform.position).normalized * moveSpeed, ForceMode.VelocityChange);
                     //transform.position += (destination - transform.position).normalized * moveSpeed * Time.deltaTime;
-                    transform.position = Vector3.Lerp(transform.position, newPosition, 0.5f);
+                    transform.position = Vector3.Lerp(new Vector3(transform.position.x, transform.localScale.x / 2f, transform.position.z), newPosition, 0.5f);
                 }
             }
 
@@ -247,6 +281,44 @@ public class CubeMove : MonoBehaviour
         }
     }
 
+    private bool IsPositionOnNavMesh()
+    {
+        NavMeshHit hit;
+        float halfSize = transform.localScale.x / 2f + 3f;
+        
+        float smallestX = transform.position.x - halfSize;
+        float largestX = transform.position.x + halfSize;
+        float smallestZ = transform.position.z - halfSize;
+        float largestZ = transform.position.z + halfSize;
+        
+        Vector3 position1 = new Vector3(smallestX, 0f, largestZ);
+        Vector3 position2 = new Vector3(largestX, 0f, largestZ);
+        Vector3 position3 = new Vector3(smallestX, 0f, smallestZ);
+        Vector3 position4 = new Vector3(largestX, 0f, smallestZ);
+
+        if (!(NavMesh.SamplePosition(position1, out hit, 0.1f, NavMesh.AllAreas) || NavMesh.SamplePosition(position1, out hit, 4f, NavMesh.AllAreas)))
+        {
+            outOfNavMeshPos = position1;
+            return false;
+        }
+        if (!(NavMesh.SamplePosition(position2, out hit, 0.1f, NavMesh.AllAreas) || NavMesh.SamplePosition(position2, out hit, 4f, NavMesh.AllAreas)))
+        {
+            outOfNavMeshPos = position2;
+            return false;
+        }
+        if (!(NavMesh.SamplePosition(position3, out hit, 0.1f, NavMesh.AllAreas) || NavMesh.SamplePosition(position3, out hit, 4f, NavMesh.AllAreas)))
+        {
+            outOfNavMeshPos = position3;
+            return false;
+        }
+        if (!(NavMesh.SamplePosition(position4, out hit, 0.1f, NavMesh.AllAreas) || NavMesh.SamplePosition(position4, out hit, 4f, NavMesh.AllAreas)))
+        {
+            outOfNavMeshPos = position4;
+            return false;
+        }
+        return true;
+    }
+
     /*private void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject.CompareTag("PlayerCube"))
@@ -261,4 +333,17 @@ public class CubeMove : MonoBehaviour
             
         }
     }*/
+
+    private bool GroundCheck()
+    {
+        Collider[] objects = Physics.OverlapSphere(transform.position + GameObject.FindGameObjectWithTag("Player").transform.position, transform.localScale.x / 2f, LayerMask.NameToLayer("Ground"));
+        if (objects.Length > 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
 }

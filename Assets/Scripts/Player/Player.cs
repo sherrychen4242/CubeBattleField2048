@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     #region PUBLIC VARIABLES
     public int currentNumber;
+    public int highestNumber;
     #endregion
 
     #region PRIVATE VARIABLES
@@ -15,12 +16,16 @@ public class Player : MonoBehaviour
     void Start()
     {
         currentNumber = 2;
+        highestNumber = 2;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (currentNumber > highestNumber)
+        {
+            highestNumber = currentNumber;
+        }
     }
 
     public void PickUpCoin()

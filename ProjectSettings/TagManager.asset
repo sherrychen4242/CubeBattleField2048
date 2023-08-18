@@ -10,6 +10,9 @@ TagManager:
   - FxTemporaire
   - Bullet
   - Obstacle
+  - LevelSelectionRoomPlayer
+  - Coin
+  - Portal
   layers:
   - Default
   - TransparentFX

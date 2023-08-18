@@ -268,7 +268,6 @@ GameObject:
   - component: {fileID: 360051206503414852}
   - component: {fileID: 360051206503414902}
   - component: {fileID: -4261571599613969445}
-  - component: {fileID: 7371956685857784824}
   - component: {fileID: -3465277471480944078}
   - component: {fileID: 599638108989154325}
   - component: {fileID: 7170497363998967289}
@@ -448,28 +447,6 @@ MonoBehaviour:
   spiderEffect: 0
   origSpeed: 0
   slowDownPercentage: 0.5
---- !u!195 &7371956685857784824
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 360051206503414861}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 1
-  m_BaseOffset: 0.5
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!114 &-3465277471480944078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -483,7 +460,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 20
-  agent: {fileID: 7371956685857784824}
+  agent: {fileID: 0}
   destinationVector: {x: 0, y: 0, z: 0}
   destination: {x: 0, y: 0, z: 0}
   obstaclesNear: 0

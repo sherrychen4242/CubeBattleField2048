@@ -12,12 +12,13 @@ GameObject:
   - component: {fileID: 4390047529337360813}
   - component: {fileID: 8495521314836301070}
   - component: {fileID: 3233488493567617059}
+  - component: {fileID: 1820572772135574480}
   m_Layer: 9
   m_Name: Branch 1
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &3763174912434591572
 Transform:
@@ -26,10 +27,10 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1811488569958772947}
-  m_LocalRotation: {x: -0, y: -0.4218355, z: -0, w: 0.9066724}
+  m_LocalRotation: {x: 0, y: -0.4218351, z: 0, w: 0.90667266}
   m_LocalPosition: {x: 11.32, y: -0.0056195, z: -3.9499998}
-  m_LocalScale: {x: 3.3839693, y: 3.3839693, z: 3.3839693}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -97,3 +98,32 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.103646025, y: 0.07802897, z: 0.9075807}
   m_Center: {x: -0.0026097689, y: 0.0023571067, z: 0.053198725}
+--- !u!114 &1820572772135574480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1811488569958772947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 1
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_BuildHeightMesh: 0
+  m_NavMeshData: {fileID: 0}

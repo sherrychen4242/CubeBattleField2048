@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StartNewGameButton : MonoBehaviour
 {
@@ -34,5 +35,10 @@ public class StartNewGameButton : MonoBehaviour
     public void MouseHoverFalse()
     {
         onMouseHover = false;
+    }
+
+    public void StartNewGame()
+    {
+        SceneManager.LoadScene(1);
     }
 }
