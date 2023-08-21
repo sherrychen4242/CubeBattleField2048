@@ -12,13 +12,13 @@ GameObject:
   - component: {fileID: 485220975371326341}
   - component: {fileID: 485220975371326340}
   - component: {fileID: 485220975371326343}
-  - component: {fileID: 485220975371326346}
   - component: {fileID: 485220975371326347}
   - component: {fileID: 485220975371326344}
   - component: {fileID: -5300024893261881476}
   - component: {fileID: -1031673417674725934}
   - component: {fileID: 8184207297293456242}
   - component: {fileID: 6209983118547289744}
+  - component: {fileID: 4947030418504216226}
   m_Layer: 8
   m_Name: Cube16
   m_TagString: PlayerCube
@@ -105,29 +105,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &485220975371326346
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 485220975371326337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e25fe6e95fffa4b1f82fdf8a716f0d9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  arrowImage: {fileID: 485220976033154984}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 64
-  bulletPrefab: {fileID: 1169914053910412462, guid: d7e14dd8dc3f4214a973867d102778f9, type: 3}
-  shootingCoolDownTime: 0.5
-  bulletPos: {fileID: 485220976060716654}
-  bulletSpeed: 20
-  timer: {fileID: 485220975371326347}
-  mousePosition: {x: 0, y: 0, z: 0}
-  isLeftMouseButtonDown: 0
 --- !u!114 &485220975371326347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,12 +180,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 20
-  agent: {fileID: 0}
   destinationVector: {x: 0, y: 0, z: 0}
   destination: {x: 0, y: 0, z: 0}
   obstaclesNear: 0
   avoidObstaclesTime: 0
   obstacleEncountered: 0
+  onNavMesh: 1
+  outOfNavMeshPos: {x: 0, y: 0, z: 0}
+  onGround: 1
+  groundCheckTimer: 0
 --- !u!65 &8184207297293456242
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -238,6 +218,29 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 3
+--- !u!114 &4947030418504216226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 485220975371326337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1d24998ab4711c4585d92bd0c89a3e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arrowImage: {fileID: 485220976033154984}
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 64
+  bulletPrefab: {fileID: 1169914053910412462, guid: d7e14dd8dc3f4214a973867d102778f9, type: 3}
+  shootingCoolDownTime: 0.5
+  bulletPos: {fileID: 485220976060716654}
+  bulletSpeed: 20
+  timer: {fileID: 485220975371326347}
+  mousePosition: {x: 0, y: 0, z: 0}
+  isLeftMouseButtonDown: 0
 --- !u!1 &485220975552520996
 GameObject:
   m_ObjectHideFlags: 0

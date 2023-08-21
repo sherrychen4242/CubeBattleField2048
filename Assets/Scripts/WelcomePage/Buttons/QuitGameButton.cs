@@ -15,4 +15,9 @@ public class QuitGameButton : MonoBehaviour
     {
         onMouseHover = false;
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }

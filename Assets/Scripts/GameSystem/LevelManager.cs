@@ -41,6 +41,7 @@ public class LevelManager : MonoBehaviour
 
 
     public bool portalFlag = false;
+    public bool saveDataFlag = false;
     #endregion
 
     private void Awake()
@@ -103,6 +104,15 @@ public class LevelManager : MonoBehaviour
         if (playerCurrentNumber <= 0 || allOutside)
         {
             //Time.timeScale = 0.1f;
+            // Save coins earned
+            if (!saveDataFlag)
+            {
+                int coinsObtained = FindObjectOfType<Player>().highestNumber;
+                DataPersistenceManager.instance.gameData.totalCoins += coinsObtained;
+                DataPersistenceManager.instance.SaveGame();
+                saveDataFlag = true;
+            }
+            
             FindObjectOfType<CameraFollow>().enabled = false;
             wastedCanvas.SetActive(true);
             wastedCanvas.GetComponent<WastedCanvas>().Appear();

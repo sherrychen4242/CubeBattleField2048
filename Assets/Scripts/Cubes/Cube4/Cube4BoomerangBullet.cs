@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cube4BoomerangBullet : MonoBehaviour
+public class Cube4BoomerangBullet : MonoBehaviour, IDataPersistence
 {
     [SerializeField] float bulletSurvivalTime;
     [SerializeField] Timer timer;
@@ -15,6 +15,8 @@ public class Cube4BoomerangBullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        LoadData(DataPersistenceManager.instance.gameData);
+
         setUpFlyBackTimer = false;
 
         timer.maxTime = bulletSurvivalTime;
@@ -64,5 +66,19 @@ public class Cube4BoomerangBullet : MonoBehaviour
     public void Spin()
     {
         transform.Rotate(Vector3.up, spinSpeed * Time.deltaTime);
+    }
+
+    public void LoadData(GameData data)
+    {
+        bulletSurvivalTime = data.cube4_BulletSurvivalTime;
+        flyBackTime = data.cube4_BulletFlyBackTime;
+        transform.localScale = new Vector3(data.cube4_BulletSize, data.cube4_BulletSize, data.cube4_BulletSize);
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.cube4_BulletSurvivalTime = bulletSurvivalTime;
+        data.cube4_BulletFlyBackTime = flyBackTime;
+        data.cube4_BulletSize = transform.localScale.x;
     }
 }

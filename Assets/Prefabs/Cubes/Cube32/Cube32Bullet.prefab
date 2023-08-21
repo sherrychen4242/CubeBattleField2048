@@ -28568,7 +28568,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69b5bdb952fd6f047bc16122dd3556ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSurvivalTime: 4
+  bulletSurvivalTime: 1
   timer: {fileID: 2831248088271555079}
   bulletDamage: 32
   fireEffect: {fileID: 6081578419035963267, guid: ed1c96727a6f21642ae08f0c93db1c4f, type: 3}

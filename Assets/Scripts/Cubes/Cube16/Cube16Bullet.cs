@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cube16Bullet : MonoBehaviour
+public class Cube16Bullet : MonoBehaviour, IDataPersistence
 {
     [SerializeField] float bulletSurvivalTime;
     [SerializeField] Timer timer;
@@ -12,6 +12,8 @@ public class Cube16Bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        LoadData(DataPersistenceManager.instance.gameData);
+
         timer.maxTime = bulletSurvivalTime;
         timer.startMethodRightAway = false;
         timer.StartTimer();
@@ -38,5 +40,17 @@ public class Cube16Bullet : MonoBehaviour
                 enemy.GetComponent<Health>().TakeDamage(bulletDamage);
             }
         }
+    }
+
+    public void LoadData(GameData data)
+    {
+        bulletSurvivalTime = data.cube16_BulletSurvivalTime;
+        transform.localScale = new Vector3(data.cube16_BulletSize, data.cube16_BulletSize, data.cube16_BulletSize);
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.cube16_BulletSurvivalTime = bulletSurvivalTime;
+        data.cube16_BulletSize = transform.localScale.x;
     }
 }

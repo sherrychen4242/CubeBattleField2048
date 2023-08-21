@@ -39,6 +39,7 @@ public class StartNewGameButton : MonoBehaviour
 
     public void StartNewGame()
     {
+        DataPersistenceManager.instance.NewGame();
         SceneManager.LoadScene(1);
     }
 }

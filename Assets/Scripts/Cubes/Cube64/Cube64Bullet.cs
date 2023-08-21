@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cube64Bullet : MonoBehaviour
+public class Cube64Bullet : MonoBehaviour, IDataPersistence
 {
     [SerializeField] float bulletSurvivalTime;
     [SerializeField] Timer timer;
@@ -20,6 +20,8 @@ public class Cube64Bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        LoadData(DataPersistenceManager.instance.gameData);
+
         currentNumHits = 0;
         initialEnemyHit = false;
 
@@ -108,5 +110,21 @@ public class Cube64Bullet : MonoBehaviour
             enemies[i] = enemyColliders[i].gameObject;
         }
         return enemies;
+    }
+
+    public void LoadData(GameData data)
+    {
+        bulletSurvivalTime = data.cube64_BulletSurvivalTime;
+        transform.localScale = new Vector3(data.cube64_BulletSize, data.cube64_BulletSize, data.cube64_BulletSize);
+        numberOfHits = data.cube64_NumHits;
+        findEnemyRadius = data.cube64_FindEnemyRadius;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.cube64_BulletSurvivalTime = bulletSurvivalTime;
+        data.cube64_BulletSize = transform.localScale.x;
+        data.cube64_NumHits = numberOfHits;
+        data.cube64_FindEnemyRadius = findEnemyRadius;
     }
 }

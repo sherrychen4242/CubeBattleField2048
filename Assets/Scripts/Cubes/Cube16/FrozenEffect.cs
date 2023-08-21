@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class FrozenEffect : MonoBehaviour
+public class FrozenEffect : MonoBehaviour, IDataPersistence
 {
     [SerializeField] float timeTillDie;
     [SerializeField] float frozenEffectiveTime;
@@ -20,6 +20,8 @@ public class FrozenEffect : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        LoadData(DataPersistenceManager.instance.gameData);
+
         timer.maxTime = timeTillDie;
         timer.startMethodRightAway = false;
         timer.StartTimer();
@@ -116,5 +118,17 @@ public class FrozenEffect : MonoBehaviour
                 other.gameObject.GetComponent<EnemySlowDownEffect>().frozenSlowedDownFlag = false;
             }
         }
+    }
+
+    public void LoadData(GameData data)
+    {
+        frozenEffectiveTime = data.cube16_FrozenEffectiveTime;
+        timeTillDie = data.cube16_FrozenEffectSurvivalTime;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.cube16_FrozenEffectiveTime = frozenEffectiveTime;
+        data.cube16_FrozenEffectSurvivalTime = timeTillDie;
     }
 }

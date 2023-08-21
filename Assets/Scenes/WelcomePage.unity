@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 59d0a3a7307060243b699813ed15ab74, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -1302,6 +1302,86 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &820829681
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 820829683}
+  - component: {fileID: 820829682}
+  m_Layer: 0
+  m_Name: DataPersistenceManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &820829682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 820829681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cbaa6189fe16874193b00b7b3d388ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fileName: Save
+  gameData:
+    totalCoins: 0
+    cube2_CoolDownTime: 0.2
+    cube2_BulletSpeed: 20
+    cube2_BulletSurvivalTime: 0.5
+    cube2_BulletSize: 0.3
+    cube4_CoolDownTime: 0.5
+    cube4_BulletSpeed: 20
+    cube4_BulletSurvivalTime: 1
+    cube4_BulletFlyBackTime: 0.5
+    cube4_BulletSize: 0.8
+    cube8_CoolDownTime: 0.5
+    cube8_BulletSpeed: 20
+    cube8_NumBullets: 5
+    cube8_BulletRotationAngle: 30
+    cube8_BulletSurvivalTime: 0.5
+    cube8_BulletSize: 0.8
+    cube16_CoolDownTime: 0.5
+    cube16_BulletSpeed: 20
+    cube16_BulletSurvivalTime: 1
+    cube16_BulletSize: 1
+    cube16_FrozenEffectiveTime: 1
+    cube16_FrozenEffectSurvivalTime: 4
+    cube32_CoolDownTime: 0.5
+    cube32_BulletSpeed: 20
+    cube32_BulletSurvivalTime: 1
+    cube32_BulletSize: 1
+    cube32_FireEffectiveTime: 1
+    cube32_FireEffectSurvivalTime: 4
+    cube64_CoolDownTime: 0.5
+    cube64_BulletSpeed: 100
+    cube64_BulletSurvivalTime: 2
+    cube64_BulletSize: 1
+    cube64_NumHits: 5
+    cube64_FindEnemyRadius: 10
+--- !u!4 &820829683
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 820829681}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1029130252
 GameObject:
   m_ObjectHideFlags: 0
@@ -2076,7 +2156,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1175188862}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1175188864}
+        m_TargetAssemblyTypeName: QuitGameButton, Assembly-CSharp
+        m_MethodName: QuitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1175188862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2654,7 +2746,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1530635325}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1530635327}
+        m_TargetAssemblyTypeName: LoadGameButton, Assembly-CSharp
+        m_MethodName: LoadGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1530635325
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LoadGameButton : MonoBehaviour
 {
@@ -14,5 +15,11 @@ public class LoadGameButton : MonoBehaviour
     public void MouseHoverFalse()
     {
         onMouseHover = false;
+    }
+
+    public void LoadGame()
+    {
+        DataPersistenceManager.instance.LoadGame();
+        SceneManager.LoadScene(1);
     }
 }

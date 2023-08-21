@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireEffect : MonoBehaviour
+public class FireEffect : MonoBehaviour, IDataPersistence
 {
     [SerializeField] float timeTillDie;
     [SerializeField] float fireEffectiveTime;
@@ -14,7 +14,8 @@ public class FireEffect : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        LoadData(DataPersistenceManager.instance.gameData);
+
         fireEffectTimerSetup = false;
         canFire = true;
 
@@ -110,5 +111,17 @@ public class FireEffect : MonoBehaviour
                 other.gameObject.GetComponent<EnemyBurningEffect>().fireEffectFlag = false;
             }
         }
+    }
+
+    public void LoadData(GameData data)
+    {
+        fireEffectiveTime = data.cube32_FireEffectiveTime;
+        timeTillDie = data.cube32_FireEffectSurvivalTime;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.cube32_FireEffectiveTime = fireEffectiveTime;
+        data.cube32_FireEffectSurvivalTime = timeTillDie;
     }
 }

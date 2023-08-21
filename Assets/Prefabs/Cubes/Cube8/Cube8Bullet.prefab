@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 7918693660321527373}
   - component: {fileID: 7918693660321527374}
   - component: {fileID: 7918693660321527375}
-  - component: {fileID: 7918693660321527729}
   - component: {fileID: 7918693660321527730}
   - component: {fileID: 1494545036681146446}
+  - component: {fileID: 9159415264629603774}
   m_Layer: 0
   m_Name: Cube8Bullet
   m_TagString: Bullet
@@ -117,21 +117,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 3
---- !u!114 &7918693660321527729
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7918693660321527368}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09393b94c391e404e8b6fe3bd00648ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletSurvivalTime: 0.5
-  timer: {fileID: 7918693660321527730}
-  bulletDamage: 1
 --- !u!114 &7918693660321527730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,3 +249,18 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &9159415264629603774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7918693660321527368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: babe03c1a42a1d14ca67616de075cdf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletSurvivalTime: 0.5
+  timer: {fileID: 7918693660321527730}
+  bulletDamage: 1

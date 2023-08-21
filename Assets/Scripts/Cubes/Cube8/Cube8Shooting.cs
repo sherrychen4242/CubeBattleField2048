@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cube8Shooting : CubeShooting
+public class Cube8Shooting : CubeShooting, IDataPersistence
 {
     #region PUBLIC VARIABLES
     [SerializeField] float bulletRotationAngle;
@@ -17,6 +17,8 @@ public class Cube8Shooting : CubeShooting
 
     public override void Start()
     {
+        LoadData(DataPersistenceManager.instance.gameData);
+
         base.Start();
 
         if (numberOfBullets % 2 == 1)
@@ -75,5 +77,20 @@ public class Cube8Shooting : CubeShooting
         return directions;
     }
 
-    
+    public void LoadData(GameData data)
+    {
+        shootingCoolDownTime = data.cube8_CoolDownTime;
+        bulletSpeed = data.cube8_BulletSpeed;
+        numberOfBullets = data.cube8_NumBullets;
+        bulletRotationAngle = data.cube8_BulletRotationAngle;
+
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.cube8_CoolDownTime = shootingCoolDownTime;
+        data.cube8_BulletSpeed = bulletSpeed;
+        data.cube8_NumBullets = numberOfBullets;
+        data.cube8_BulletRotationAngle = bulletRotationAngle;
+    }
 }
