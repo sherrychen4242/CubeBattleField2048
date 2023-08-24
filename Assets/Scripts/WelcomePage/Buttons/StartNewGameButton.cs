@@ -39,6 +39,7 @@ public class StartNewGameButton : MonoBehaviour
 
     public void StartNewGame()
     {
+        SoundManager.Instance.PlaySound(SoundManager.SoundEffects.UIClickSound);
         DataPersistenceManager.instance.NewGame();
         SceneManager.LoadScene(1);
     }

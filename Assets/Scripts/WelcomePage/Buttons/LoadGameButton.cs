@@ -19,6 +19,7 @@ public class LoadGameButton : MonoBehaviour
 
     public void LoadGame()
     {
+        SoundManager.Instance.PlaySound(SoundManager.SoundEffects.UIClickSound);
         DataPersistenceManager.instance.LoadGame();
         SceneManager.LoadScene(1);
     }

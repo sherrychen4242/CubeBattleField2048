@@ -26,6 +26,7 @@ public class Health : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
+            SoundManager.Instance.PlaySound(SoundManager.SoundEffects.EnemyDieSound);
             GameObject bloodSplash = Instantiate(bloodSplashEffect, transform.position, Quaternion.identity);
             float scale = gameObject.transform.localScale.x;
             bloodSplash.transform.localScale = new Vector3(scale, scale, scale);

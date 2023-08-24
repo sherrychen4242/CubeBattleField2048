@@ -37,6 +37,7 @@ public class EnemyCube8Bullet : MonoBehaviour
 
                 
                 Vector3 dir = gameObject.transform.position - collision.gameObject.transform.position;
+                SoundManager.Instance.PlaySound(SoundManager.SoundEffects.BloodSound);
                 GameObject blood = Instantiate(bulletHitBloodEffect, collision.transform.position + dir.normalized * collision.gameObject.transform.localScale.x/2, Quaternion.EulerAngles(0, -90, 0));
                 blood.transform.forward = dir.normalized;
                 blood.transform.localScale *= collision.gameObject.transform.localScale.x / 2;

@@ -20,6 +20,7 @@ public class Cube32Shooting : CubeShooting, IDataPersistence
 
     public override void Shooting()
     {
+        SoundManager.Instance.PlaySound(SoundManager.SoundEffects.Cube32ShootingSound);
         GameObject bullet = Instantiate(bulletPrefab, bulletPos.position, Quaternion.Euler(-90f, 0f, 0f));
 
         Vector3 dir = new Vector3(mousePosition.x - transform.position.x, 0f, mousePosition.z - transform.position.z);

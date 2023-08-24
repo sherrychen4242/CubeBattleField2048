@@ -42,11 +42,13 @@ public class Coin : MonoBehaviour
         {
             if (other.gameObject.GetComponent<Player>() != null)
             {
+                SoundManager.Instance.PlaySound(SoundManager.SoundEffects.PickUpCoinSound);
                 other.gameObject.GetComponent<Player>().PickUpCoin();
                 Destroy(gameObject);
             }
             else if (other.gameObject.GetComponentInParent<Player>() != null)
             {
+                SoundManager.Instance.PlaySound(SoundManager.SoundEffects.PickUpCoinSound);
                 other.gameObject.GetComponentInParent<Player>().PickUpCoin();
                 Destroy(gameObject);
             }

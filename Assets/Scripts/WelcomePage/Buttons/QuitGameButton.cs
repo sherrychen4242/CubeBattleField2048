@@ -18,6 +18,7 @@ public class QuitGameButton : MonoBehaviour
 
     public void QuitGame()
     {
+        SoundManager.Instance.PlaySound(SoundManager.SoundEffects.UIClickSound);
         Application.Quit();
     }
 }

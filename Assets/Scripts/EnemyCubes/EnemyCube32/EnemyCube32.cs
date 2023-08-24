@@ -73,6 +73,7 @@ public class EnemyCube32 : MonoBehaviour
                 {
                     Vector3 dir = target.transform.position - transform.position;
                     Vector3 bulletPosition = transform.position + dir.normalized * gameObject.transform.localScale.x * 1.1f;
+                    SoundManager.Instance.PlaySound(SoundManager.SoundEffects.EnemyCube32ShootingBubbleSound);
                     GameObject bullet = Instantiate(bulletPrefab, bulletPosition, Quaternion.identity);
                     /*bullet.GetComponent<Rigidbody>().AddForce(dir.normalized * bulletSpeed, ForceMode.VelocityChange);*/
                     canShoot = false;

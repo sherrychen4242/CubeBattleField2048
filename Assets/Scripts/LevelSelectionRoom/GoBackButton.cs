@@ -7,6 +7,7 @@ public class GoBackButton : MonoBehaviour
 {
     public void GoBack()
     {
+        SoundManager.Instance.PlaySound(SoundManager.SoundEffects.UIClickSound);
         SceneManager.LoadScene(0);
     }
 }

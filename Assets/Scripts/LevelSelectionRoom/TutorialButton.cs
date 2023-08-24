@@ -7,6 +7,7 @@ public class TutorialButton : MonoBehaviour
 {
     public void GoToTutorialLevel()
     {
+        SoundManager.Instance.PlaySound(SoundManager.SoundEffects.UIClickSound);
         SceneManager.LoadScene(2);
     }
 }

@@ -85,6 +85,7 @@ public class Cube64Bullet : MonoBehaviour, IDataPersistence
                 {
                     initialEnemyHit = true;
                     currentNumHits += 1;
+                    SoundManager.Instance.PlaySound(SoundManager.SoundEffects.EnemyCube64HitSound);
                     Instantiate(electricHitEffect, collision.transform.position, Quaternion.identity);
                     enemy.GetComponent<Health>().TakeDamage(bulletDamage);
 
@@ -93,6 +94,7 @@ public class Cube64Bullet : MonoBehaviour, IDataPersistence
                 else
                 {
                     currentNumHits += 1;
+                    SoundManager.Instance.PlaySound(SoundManager.SoundEffects.EnemyCube64HitSound);
                     Instantiate(electricHitEffect, collision.transform.position, Quaternion.identity);
                     enemy.GetComponent<Health>().TakeDamage(bulletDamage);
                 }

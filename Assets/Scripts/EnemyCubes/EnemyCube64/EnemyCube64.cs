@@ -74,6 +74,7 @@ public class EnemyCube64 : MonoBehaviour
                 {
                     Vector3 dir = target.transform.position - transform.position;
                     Vector3 bulletPosition = transform.position + dir.normalized * gameObject.transform.localScale.x * 1.1f;
+                    SoundManager.Instance.PlaySound(SoundManager.SoundEffects.EnemyCube64SpiderNetSound);
                     GameObject bullet = Instantiate(bulletPrefab, bulletPosition, Quaternion.identity);
                     bullet.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
                     bullet.GetComponent<SpidernetEffect>().targetPos = target.transform.position;

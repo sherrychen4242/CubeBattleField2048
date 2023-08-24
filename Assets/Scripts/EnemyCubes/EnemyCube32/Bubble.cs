@@ -50,14 +50,18 @@ public class Bubble : MonoBehaviour
         {
             if (other.gameObject.GetComponentInParent<Player>() != null)
             {
+                SoundManager.Instance.PlaySound(SoundManager.SoundEffects.EnemyCube32BubbleExplosionSound);
                 other.gameObject.GetComponentInParent<Player>().TakeDamage(damage);
                 Instantiate(poisonEffect, transform.position, Quaternion.identity);
+                //SoundManager.Instance.PlaySound(SoundManager.SoundEffects.EnemyCube32PoisonSound);
                 Destroy(gameObject);
             }
             
         }
         else if (other.gameObject.CompareTag("Bullet"))
         {
+            SoundManager.Instance.PlaySound(SoundManager.SoundEffects.EnemyCube32BubbleExplosionSound);
+            //SoundManager.Instance.PlaySound(SoundManager.SoundEffects.EnemyCube32PoisonSound);
             Instantiate(poisonEffect, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }

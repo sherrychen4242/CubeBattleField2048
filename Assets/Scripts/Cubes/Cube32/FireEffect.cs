@@ -26,6 +26,8 @@ public class FireEffect : MonoBehaviour, IDataPersistence
         timer.AddTimer("FireEffectTimer", fireEffectiveTime, false);
         timer.StartTimer("FireEffectTimer");
         fireEffectTimerSetup = true;
+
+        //SoundManager.Instance.PlaySound(SoundManager.SoundEffects.Cube32FireEffectSound);
     }
 
     // Update is called once per frame

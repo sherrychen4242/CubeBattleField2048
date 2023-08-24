@@ -30,6 +30,8 @@ public class FrozenEffect : MonoBehaviour, IDataPersistence
 */        
         frozenEffectTimerSetup = false;
         canFreeze = true;
+
+        //SoundManager.Instance.PlaySound(SoundManager.SoundEffects.Cube16FrozenEffectSound);
     }
 
     // Update is called once per frame

@@ -235,6 +235,7 @@ public class EnemyCube2 : MonoBehaviour
                     cube.GetComponentInParent<CubeMovement>().KickBack(dir);
                     healthScripts[targetPlayerIndex].TakeDamage(damageAmount);
                     // Blood Effect
+                    SoundManager.Instance.PlaySound(SoundManager.SoundEffects.BloodSound);
                     GameObject blood = Instantiate(bulletHitBloodEffect, cube.transform.position - dir.normalized * cube.transform.localScale.x / 2, Quaternion.EulerAngles(0, -90, 0));
                     blood.transform.forward = -dir.normalized;
                     blood.transform.localScale *= cube.transform.localScale.x;

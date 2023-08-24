@@ -29,6 +29,7 @@ public class TimedBomb : MonoBehaviour
         {
             timer.AddTimer("SelfDestroy", selfDestroyTime, false);
             timer.StartTimer("SelfDestroy");
+            //SoundManager.Instance.PlaySound(SoundManager.SoundEffects.EnemyCube16TimedBombSound);
             selfDestroyTimerSetUp = true;
         }
 
@@ -40,6 +41,7 @@ public class TimedBomb : MonoBehaviour
 
     void Explode()
     {
+        SoundManager.Instance.PlaySound(SoundManager.SoundEffects.EnemyCube16ExplosionSound);
         Instantiate(explosionEffect, transform.position, Quaternion.identity);
         CauseDamage();
         Destroy(gameObject);

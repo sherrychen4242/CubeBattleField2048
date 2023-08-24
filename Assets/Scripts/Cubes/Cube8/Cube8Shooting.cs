@@ -36,7 +36,7 @@ public class Cube8Shooting : CubeShooting, IDataPersistence
 /*        Vector3 dir = new Vector3(mousePosition.x - transform.position.x, 0f, mousePosition.z - transform.position.z);
 */        
         List<Vector3> directions = CalculateBulletDirections();
-
+        SoundManager.Instance.PlaySound(SoundManager.SoundEffects.Cube8ShootingSound);
         for (int i = 0; i < numberOfBullets; i++)
         {
             GameObject bullet = Instantiate(bulletPrefab, bulletPos.position, Quaternion.identity);

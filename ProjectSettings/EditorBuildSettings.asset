@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/CubeUpgrade.unity
+    guid: 870dd8d17e429004bb9e16c35469c7f9
   m_configObjects: {}

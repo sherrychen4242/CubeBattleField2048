@@ -114,10 +114,17 @@ public class LevelManager : MonoBehaviour
             }
             
             FindObjectOfType<CameraFollow>().enabled = false;
+            SoundManager.Instance._musicSource.Stop();
+            SoundManager.Instance.PlaySound(SoundManager.SoundEffects.GameOverSound);
+            SoundManager.Instance._effectsSource.pitch = 1f;
+            SoundManager.Instance._effectsSource.volume = 0.3f;
             wastedCanvas.SetActive(true);
             wastedCanvas.GetComponent<WastedCanvas>().Appear();
             if (wastedCanvas.GetComponent<WastedCanvas>().appearFinished)
             {
+                SoundManager.Instance._effectsSource.Stop();
+                SoundManager.Instance._effectsSource.pitch = 1f;
+                SoundManager.Instance._effectsSource.volume = 1f;
                 SceneManager.LoadScene(1);
             }
         }

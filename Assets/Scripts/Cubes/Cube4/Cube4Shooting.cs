@@ -29,6 +29,7 @@ public class Cube4Shooting : CubeShooting, IDataPersistence
 
     public override void Shooting()
     {
+        SoundManager.Instance.PlaySound(SoundManager.SoundEffects.Cube4ShootingSound);
         GameObject bullet = Instantiate(bulletPrefab, bulletPos.position, Quaternion.identity);
 
         Vector3 dir = new Vector3(mousePosition.x - transform.position.x, 0f, mousePosition.z - transform.position.z);
